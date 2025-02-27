@@ -1,0 +1,51 @@
+<%- include("partials/header.ejs") %>
+
+<div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
+    <div class="row">
+        <div class="col-md-6 px-5">
+            <h1 class="display-4 fst-italic" style="font-family: 'Georgia', serif;">Welcome to 
+                <span style="font-family: 'Arial Black', sans-serif; color: #D91A1A;">DiavoloBlog</span>!
+            </h1>
+            <p class="lead my-3">
+                Dive into the world of <strong>AC Milan</strong>! At <span style="font-family: 'Arial Black', sans-serif; color: #D91A1A;">DiavoloBlog</span>, 
+                you'll find the latest news, match analysis, transfer updates, and legendary moments from the Rossoneri.  
+            </p>
+            <p class="lead mb-0"><a href="/about" class="text-body-emphasis fw-bold">About Us</a></p>
+        </div>
+        <div class="col-md-6">
+            <img src="images/Supercoppa.jpg" alt="AC Milan" class="img-fluid rounded">
+        </div>
+    </div>
+</div>
+
+<!-- Zone d'affichage des articles -->
+<div class="row mb-2 px-5">
+    <% if (!articles || articles.length === 0) { %>
+        <p class="text-center">No articles available. Be the first to create one!</p>
+    <% } else { %>
+        <% articles.forEach(article => { %>
+            <div class="col-md-6">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-success-emphasis"><%= article.category %></strong>
+                        <h3 class="mb-0"><%= article.title %></h3>
+                        <div class="mb-1 text-body-secondary"><%= article.date %></div>
+                        <p class="mb-auto"><%= article.content.substring(0, 100) %>...</p>
+                        <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
+                            Continue reading
+                            <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
+                        </a>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                        <img src="<%= article.image %>" width="200" height="250" class="bd-placeholder-img">
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    <% } %>
+</div>
+
+<!-- Bouton pour créer un nouvel article -->
+<a href="/create" class="btn btn-primary mb-3">Create a New Article</a>
+
+<%- include("partials/footer.ejs") %>
